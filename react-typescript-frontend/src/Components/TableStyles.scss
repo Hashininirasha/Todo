@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+  
+    background: blueviolet;
+  }
+
+table {
+    width: 80%;
+    margin: 0 auto; 
+   
+    overflow: hidden; 
+    background: white;
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+  
+    th {
+        background: white
+    }
+  
+    tr:nth-child(even) {
+    background: white    }
+  
+    tr:hover {
+    background: linear-gradient(to right, blueviolet, lightblue);    }
+  }
+  
+
+
+.custom-icon-color {
+  color: black; 
+}
+
+
+.MuiButton-startIcon {
+  .custom-icon-color {
+    color: black; 
+  }
+}
