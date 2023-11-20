@@ -13,6 +13,35 @@
   }
   
   .submit-button {
-    margin-top: 10px;
+    margin: 10px !important;
+    background-color: black !important;
+    width: 50px !important;
+    height: 40px !important;
+    
   }
   
+ 
+
+  .text-input {
+
+    width: 2px;
+    margin-right: 5px;
+    margin-left: 2px;
+    color: white !important;
+  }
+
+  .text-input-Dec{
+    width: 25% !important;
+    background-color:white
+  }
+  .text-input-status {
+    margin-left: 10px !important;
+    width: 200px !important;
+    background-color:white
+  }
+  .text-input-title{
+    width: 200px !important;
+    margin-right: 15px !important;
+    margin-left: 120px !important;
+    background-color:white
+  }

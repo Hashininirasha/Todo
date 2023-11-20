@@ -33,7 +33,13 @@ const Table: React.FC<TableProps> = ({ data, onEdit, onDelete }) => {
               <td>{row.id}</td>
               <td>{row.title}</td>
               <td>{row.description}</td>
-              <td>{row.isActive ? 'Completed' : 'Not Completed'}</td>
+              <td>
+                  {row.status === 0 ? 'Completed' :
+                  row.status === 1 ? 'High priority' :
+                  row.status === 2 ? 'Low priority' :
+                  'Unknown status'}
+                </td>
+
               <td>
             <Button onClick={() => onEdit(row)} startIcon={<EditIcon className="custom-icon-color" />}>
  

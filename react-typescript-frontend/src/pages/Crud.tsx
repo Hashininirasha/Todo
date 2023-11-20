@@ -1,24 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Item } from '../types';
 import Table from '../Components/Table';
 import ModalComponent from '../Components/EditComponent';
 import TextInputForm from '../Components/TextInputForm';
+import axios from 'axios';
+
 
 const Crud: React.FC = () => {
-  const [sampleData, setSampleData] = useState<Item[]>([
-    { id: 1, title: 'Task 1', description: 'Description 1', isActive: 1 },
-    { id: 2, title: 'Task 2', description: 'Description 2', isActive: 1 },
-   
-  ]);
-
+  const [sampleData, setSampleData] = useState<Item[]>([]);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [isEditPopupOpen, setEditPopupOpen] = useState(false);
   const [isTextInputFormOpen, setTextInputFormOpen] = useState(false);
+  const cors = require('cors');
+
+  
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('https://localhost:7163/api/Todo');
+      setSampleData(response.data); 
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
 
   const handleEdit = (row: Item) => {
     setSelectedItem(row);
     setEditPopupOpen(true);
   };
+
+
 
   const handleEditPopupClose = () => {
     setEditPopupOpen(false);

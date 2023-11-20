@@ -7,6 +7,6 @@
 
         public string? description { get; set; }
 
-        public string? status { get; set; }
+        public int status { get; set; }
     }
 }

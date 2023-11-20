@@ -1,33 +1,48 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import './TextInputFormStyles.scss';
+import { SelectChangeEvent } from '@mui/material';
+import axios from 'axios';
 
 interface TextInputFormProps {
-  onSubmit: (title: string, description: string) => void;
+  onSubmit: (title: string, description: string, progress: number) => void;
 }
 
 const TextInputForm: React.FC<TextInputFormProps> = ({ onSubmit }) => {
-  const [title, settitle] = useState<string>('');
-  const [description, setdescription] = useState<string>('');
-
-  const inputStyle = {
-    width: '300px',
-    marginRight: '100px',
-    marginLeft: '120px',
-  };
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [progress, setProgress] = useState<number>(0);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name === 'title') {
-      settitle(value);
+      setTitle(value);
     } else if (name === 'description') {
-      setdescription(value);
+      setDescription(value);
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleProgressChange = (event: SelectChangeEvent<number>) => {
+    setProgress(event.target.value as number);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(title, description);
+    onSubmit(title, description, progress);
+
+    const url = 'https://localhost:7163/api/Todo';
+    const payload = {
+      "title": title,
+      "description": description,
+      "status": 0
+    };
+
+    try {
+      const result = await axios.post(url, payload);
+      console.log('Task added successfully:', result.data);
+    } catch (error) {
+      console.error('Error adding task:', error);
+    }
   };
 
   return (
@@ -38,10 +53,9 @@ const TextInputForm: React.FC<TextInputFormProps> = ({ onSubmit }) => {
         name="title"
         value={title}
         onChange={handleInputChange}
-        className="text-input"
+        className="text-input-title"
         fullWidth
         margin="normal"
-        style={inputStyle}
       />
       <TextField
         label="Enter description"
@@ -49,13 +63,28 @@ const TextInputForm: React.FC<TextInputFormProps> = ({ onSubmit }) => {
         name="description"
         value={description}
         onChange={handleInputChange}
-        className="text-input"
         fullWidth
         margin="normal"
-        style={inputStyle}
+        className="text-input-Dec"
       />
-      <Button type="submit" variant="contained" color="primary" className="submit-button">
-        Submit
+
+<FormControl fullWidth margin="normal" className={`text-input-status`}>
+        <InputLabel id="progress-label">Task Progress</InputLabel>
+        <Select
+          labelId="progress-label"
+          id="progress"
+          name="progress"
+          value={progress}
+          onChange={handleProgressChange}
+        >
+          <MenuItem value={1}>High priority</MenuItem>
+          <MenuItem value={2}>Low priority</MenuItem>
+          
+        </Select>
+      </FormControl>
+
+      <Button type="submit" variant="contained" className="submit-button">
+        ADD
       </Button>
     </form>
   );

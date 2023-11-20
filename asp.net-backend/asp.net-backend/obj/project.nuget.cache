@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CBQINdQGqHMU4LiFnfCm57BNJWGp+WP8PQaEj8UhBWV1wCCt8cE4K5p7w16up/btE4e5ARENTYbEGavAESi72A==",
+  "dgSpecHash": "ARZ3TX4DHlVrsIkwDcqtIZaYiU4dStKoHUtsLMULDA62b00J0ADUSY9kS4xi3OUIvqmm+wB4M/nlaxHSObpCyw==",
   "success": true,
   "projectFilePath": "C:\\ItemCrud\\asp.net-backend\\asp.net-backend\\asp.net-backend.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.2.0\\microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
+    "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.hosting.server.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.0\\microsoft.aspnetcore.http.2.2.0.nupkg.sha512",

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections;
 
 namespace asp.net_backend.Controllers
@@ -11,87 +13,123 @@ namespace asp.net_backend.Controllers
     public class TodoController : ControllerBase
     {
         private readonly ListContext _listContext;
-        public TodoController(ListContext listContext)
+        private readonly ILogger<TodoController> _logger;
+
+        public TodoController(ListContext listContext, ILogger<TodoController> logger)
         {
             _listContext = listContext;
-
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<List>>> GetList()
         {
-            if(_listContext.Lists == null )
+            try
             {
-                return NotFound();
-            }
-            return await _listContext.Lists.ToListAsync();
-        }
+                if (_listContext.Lists == null)
+                {
+                    return NotFound("No lists found.");
+                }
 
+                return await _listContext.Lists.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in GetList: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<List>> GetList(int id)
         {
-            if (_listContext.Lists == null)
+            try
             {
-                return NotFound();
-            }
-            var list = await _listContext.Lists.FindAsync(id);
-            if(list == null)
-            {
-                return NotFound();
-            }
-            return list;
-        }
+                if (_listContext.Lists == null)
+                {
+                    return NotFound("No lists found.");
+                }
 
+                var list = await _listContext.Lists.FindAsync(id);
+                if (list == null)
+                {
+                    return NotFound($"List with Id {id} not found.");
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in GetList: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
 
         [HttpPost]
         public async Task<ActionResult<List>> PostList(List list)
         {
-            _listContext.Lists.Add(list);
-            await _listContext.SaveChangesAsync();
+            try
+            {
+                _listContext.Lists.Add(list);
+                await _listContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetList), new { Id = list.id }, list);
+                return CreatedAtAction(nameof(GetList), new { Id = list.id }, list);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in PostList: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<List>> PutList(int Id, List list)
+        public async Task<ActionResult<List>> PutList(int id, List list)
         {
-            if(Id != list.id)
-            {
-                return BadRequest();
-            }
-
-            _listContext.Entry(list).State = EntityState.Modified;
             try
             {
-                await _listContext.SaveChangesAsync();
-            }
-            catch(DbUpdateConcurrencyException)
-            {
-                throw;
-            }
+                if (id != list.id)
+                {
+                    return BadRequest("Id in the URL does not match the Id in the request body.");
+                }
 
-            return Ok();
+                _listContext.Entry(list).State = EntityState.Modified;
+                await _listContext.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in PutList: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
         [HttpDelete("{id}")]
-
-        public async Task<ActionResult> DeleteList(int Id)
+        public async Task<ActionResult> DeleteList(int id)
         {
-            if(_listContext.Lists == null)
+            try
             {
-                return NotFound();
-            }
-            var list = await _listContext.Lists.FindAsync(Id);
-            if(list == null)
-            {
-                return NotFound();
-            }
-            _listContext.Lists.Remove(list);
-            await _listContext.SaveChangesAsync();
+                if (_listContext.Lists == null)
+                {
+                    return NotFound("No lists found.");
+                }
 
-            return Ok();
+                var list = await _listContext.Lists.FindAsync(id);
+                if (list == null)
+                {
+                    return NotFound($"List with Id {id} not found.");
+                }
+
+                _listContext.Lists.Remove(list);
+                await _listContext.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in DeleteList: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
         }
-
     }
 }
