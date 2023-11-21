@@ -40,7 +40,7 @@ namespace asp.net_backend.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("view/{id}")]
         public async Task<ActionResult<List>> GetList(int id)
         {
             try
@@ -65,7 +65,7 @@ namespace asp.net_backend.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("create/")]
         public async Task<ActionResult<List>> PostList(List list)
         {
             try
@@ -82,7 +82,7 @@ namespace asp.net_backend.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public async Task<ActionResult<List>> PutList(int id, List list)
         {
             try
@@ -104,7 +104,7 @@ namespace asp.net_backend.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<ActionResult> DeleteList(int id)
         {
             try

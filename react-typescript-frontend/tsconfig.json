@@ -23,5 +23,9 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "baseUrl": ".",
+    "paths": {
+      "react-toastify": ["node_modules/react-toastify"]
+    }
 }

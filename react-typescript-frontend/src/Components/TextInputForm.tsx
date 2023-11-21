@@ -30,24 +30,30 @@ const TextInputForm: React.FC<TextInputFormProps> = ({ onSubmit }) => {
     event.preventDefault();
     onSubmit(title, description, progress);
 
-    const url = 'https://localhost:7163/api/Todo';
+    const url = 'https://localhost:7163/api/Todo/create';
     const payload = {
       "title": title,
       "description": description,
-      "status": 0
+      "status": progress,
     };
-
     try {
       const result = await axios.post(url, payload);
       console.log('Task added successfully:', result.data);
+      alert('Successfully added');
+    
     } catch (error) {
       console.error('Error adding task:', error);
+    } finally {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
   };
 
   return (
     <form className="text-input-form-container" onSubmit={handleSubmit}>
       <TextField
+      id="filled-basic"
         label="Enter title"
         type="text"
         name="title"
@@ -56,8 +62,11 @@ const TextInputForm: React.FC<TextInputFormProps> = ({ onSubmit }) => {
         className="text-input-title"
         fullWidth
         margin="normal"
+        required
+        variant="filled"
       />
       <TextField
+      id="filled-basic"
         label="Enter description"
         type="text"
         name="description"
@@ -66,16 +75,21 @@ const TextInputForm: React.FC<TextInputFormProps> = ({ onSubmit }) => {
         fullWidth
         margin="normal"
         className="text-input-Dec"
+        required
+        variant="filled"
       />
 
-<FormControl fullWidth margin="normal" className={`text-input-status`}>
-        <InputLabel id="progress-label">Task Progress</InputLabel>
+
+
+<FormControl variant="filled" margin="normal" className={`text-input-status`}>
+        <InputLabel id="demo-simple-select-filled-label">Task Progress</InputLabel>
         <Select
-          labelId="progress-label"
-          id="progress"
+        labelId="demo-simple-select-filled-label"
+        id="demo-simple-select-filled"
           name="progress"
-          value={progress}
+          // value={progress}
           onChange={handleProgressChange}
+          required
         >
           <MenuItem value={1}>High priority</MenuItem>
           <MenuItem value={2}>Low priority</MenuItem>

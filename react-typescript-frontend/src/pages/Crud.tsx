@@ -4,6 +4,9 @@ import Table from '../Components/Table';
 import ModalComponent from '../Components/EditComponent';
 import TextInputForm from '../Components/TextInputForm';
 import axios from 'axios';
+import { Button } from '@mui/material';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 
 const Crud: React.FC = () => {
@@ -11,6 +14,8 @@ const Crud: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [isEditPopupOpen, setEditPopupOpen] = useState(false);
   const [isTextInputFormOpen, setTextInputFormOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const cors = require('cors');
 
   
@@ -38,6 +43,7 @@ const Crud: React.FC = () => {
 
   const handleEditPopupClose = () => {
     setEditPopupOpen(false);
+    
   };
 
   const handleSaveEdit = () => {
@@ -49,10 +55,10 @@ const Crud: React.FC = () => {
   };
 
   const handleDelete = (row: Item) => {
-    if (window.confirm('Are you sure to delete this Item')) {
+ 
 
       setSampleData((prevData: Item[]) => prevData.filter((item) => item.id !== row.id));
-    }
+    
   };
 
   const handleOpenTextInputForm = () => {
@@ -64,26 +70,30 @@ const Crud: React.FC = () => {
   };
 
   const handleTextInputFormSubmit = (input1: string, input2: string) => {
-
+    
+    setIsModalOpen(true);
     console.log('TextInputForm submitted:', input1, input2);
     handleCloseTextInputForm();
   };
 
+
+  
   return (
     <div>
       <h2>Todo List</h2>
       <TextInputForm onSubmit={handleTextInputFormSubmit} />
+     
       <Table data={sampleData} onEdit={handleEdit} onDelete={handleDelete} />
 
    
       <ModalComponent
-  open={isEditPopupOpen}
-  title="Edit Item"
-  onClose={handleEditPopupClose}
-  onSave={handleSaveEdit}
->
+        open={isEditPopupOpen}
+        title="Edit Item"
+        onClose={handleEditPopupClose}
+        onSave={handleSaveEdit}
+        itemId={selectedItem?.id || 0}
+      />
 
-</ModalComponent>
    
 
    
