@@ -26,6 +26,9 @@ Restore necessary Packages on the selected project, run the following command in
 ```sh
 Update-Package -reinstall
 ```
+Open the Package Manage console and Run the program using Ctrl + Shift + b
+
+Run the SQL query in DB
 
 
 ◾ Frontend
@@ -42,4 +45,6 @@ Run tha application
 npm start
 ```
 Launch http://localhost:3000/ in your browser to view the Web UI.
+
+![Screenshot (947)](https://github.com/Hashininirasha/Django-python-Project/assets/52965775/5d943729-22ee-4341-a779-91eef407ee98)
 
