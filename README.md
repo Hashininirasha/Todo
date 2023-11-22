@@ -21,6 +21,9 @@ This is a simple CRUD application using React and .Net Core as a framework, Enti
 Follow these steps to get your development environment set up:
 
 Clone the repository
+
+Run the SQL query in DB
+
 Restore necessary Packages on the selected project, run the following command in PM Console
 
 ```sh
