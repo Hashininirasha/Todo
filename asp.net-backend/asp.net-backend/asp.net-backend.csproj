@@ -22,4 +22,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\ItemCrud\asp.net-backend\asp.net-backend\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\ItemCrud\asp.net-backend\asp.net-backend\.editorconfig" />
+  </ItemGroup>
+
 </Project>

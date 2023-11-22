@@ -10,8 +10,8 @@ using asp.net_backend.Controllers.Models;
 namespace asp.net_backend.Migrations
 {
     [DbContext(typeof(ListContext))]
-    [Migration("20231120035505_new")]
-    partial class @new
+    [Migration("20231121174339_todoapplist")]
+    partial class todoapplist
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

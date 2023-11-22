@@ -5,7 +5,7 @@
 namespace asp.net_backend.Migrations
 {
     /// <inheritdoc />
-    public partial class initialcrud1 : Migration
+    public partial class todoapplist : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

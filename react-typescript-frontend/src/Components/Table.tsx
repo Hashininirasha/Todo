@@ -4,12 +4,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import {TableProps} from "../types"
 
-interface TableProps {
-  data: any[];
-  onEdit: (row: any) => void; 
-  onDelete: (row: any) => void; 
-}
 
 const Table: React.FC<TableProps> = ({ data, onEdit, onDelete }) => {
   if (!data || data.length === 0) {

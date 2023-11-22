@@ -11,10 +11,9 @@ namespace asp.net_backend.Controllers.Models
 
         public DbSet<List> Lists { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-          //  optionsBuilder.UseSqlite(@"C:\ItemCrud\Database\todo.db");
-        //}
+       
 
     }
+
+
 }

@@ -4,9 +4,7 @@ import './TextInputFormStyles.scss';
 import { SelectChangeEvent } from '@mui/material';
 import axios from 'axios';
 
-interface TextInputFormProps {
-  onSubmit: (title: string, description: string, progress: number) => void;
-}
+import {TextInputFormProps} from "../types"
 
 const TextInputForm: React.FC<TextInputFormProps> = ({ onSubmit }) => {
   const [title, setTitle] = useState<string>('');

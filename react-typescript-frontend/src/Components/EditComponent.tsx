@@ -12,17 +12,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { SelectChangeEvent } from '@mui/material';
 import axios from 'axios';
 import './EditComponentStyles.scss';
+import {ModalComponentProps} from "../types"
 
-interface ModalComponentProps {
-  open: boolean;
-  title: string;
-  onClose: () => void;
-  onSave: (editId: number | undefined, edittitle: string, editDescription: string, status: string) => void;
 
-  itemId: number; 
-  children?: React.ReactNode;
-
-}
 
 const ModalComponent: React.FC<ModalComponentProps> = ({ open, title, onClose, onSave, itemId, children, }) => {
   const [edittitle, setedittitle] = useState<string>('');
